@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
     return (
-        <button className="h-20 w-20 px-9 font-semibold rounded-full bg-violet-300 text-white" onClick={props.onClick}>
+        <button className="hover:bg-teal-300 active:bg-teal-500 shadow-lg h-24 w-24 text-5xl font-semibold rounded-full bg-violet-300 text-white" onClick={props.onClick}>
             {props.value}
         </button>
     );
@@ -14,24 +14,25 @@ class Board extends React.Component {
     renderSquare(i) {
         return (<Square
             value={this.props.squares[i]}
+            // value={i}
             onClick={() => this.props.onClick(i)}
         />);
     }
 
     render() {
         return (
-            <div className="">
-                <div className=" ">
+            <div className="grid grid-rows-3 gap-3">
+                <div className="grid grid-cols-3 gap-3">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </div>
-                <div className="">
+                <div className="grid grid-cols-3 gap-3">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
                 </div>
-                <div className="">
+                <div className="grid grid-cols-3 gap-3">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
@@ -107,8 +108,8 @@ class Game extends React.Component {
                 'Go to move #' + move :
                 'Go to game start';
             return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                <li className="" key={move}>
+                    <button className="rounded-sm shadow-md bg-slate-200 text-emerald-600" onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
             )
         });
@@ -120,20 +121,20 @@ class Game extends React.Component {
         }
         return (
             <div className="h-screen w-screen bg-green-50">
-                <div className="absolute w-full top-6 text-5xl font-mono font-bold text-slate-400 items-center">
+                <div className="absolute w-full top-12 text-5xl font-mono font-bold text-slate-400 items-center">
                     <p className="text-center"><span className="rounded-lg border-4">Tic-Tac-Toe</span></p>
 
                 </div>
 
-                <div className="absolute top-1/4">
+                <div className="absolute top-1/3 right-1/2">
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                     />
                 </div>
-                <div className="absolute bottom-0">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
+                <div className="absolute top-1/3 right-1/4 text-2xl font-bold font-serif text-orange-300">
+                    <div className="border-2">{status}</div>
+                    <ol className="list-inline relative space-y-2">{moves}</ol>
                 </div>
             </div>
         );
